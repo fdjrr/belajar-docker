@@ -1,0 +1,30 @@
+services:
+  wordpress:
+    container_name: wordpress
+    image: wordpress:latest
+    restart: always
+    ports:
+      - 9001:80
+    environment:
+      - WORDPRESS_DB_HOST=db
+      - WORDPRESS_DB_USER=wordpress
+      - WORDPRESS_DB_PASSWORD=wordpress
+      - WORDPRESS_DB_NAME=wordpress
+    volumes:
+      - wordpress:/var/www/html
+
+  db:
+    container_name: db
+    image: mariadb:latest
+    restart: always
+    environment:
+      - MYSQL_ROOT_PASSWORD=wordpress
+      - MYSQL_DATABASE=wordpress
+      - MYSQL_USER=wordpress
+      - MYSQL_PASSWORD=wordpress
+    volumes:
+      - db:/var/lib/mysql
+
+volumes:
+  wordpress:
+  db:
